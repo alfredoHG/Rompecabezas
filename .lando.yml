@@ -1,0 +1,5 @@
+name: rompecabezas.com
+recipe: laravel
+config:
+  php: 7.4
+  via: nginx

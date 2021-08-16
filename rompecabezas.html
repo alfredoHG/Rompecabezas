@@ -56,7 +56,7 @@
 <div class="hide" id="overlay"></div>
 <div id="modal-window" class="hide">
     <div id="modal-window-msg"></div>
-    <a href="#" id="modal-window-close" class="button">Cerrar</a>
+    <!--<a href="#" id="modal-window-close" class="button">Cerrar</a>!-->
 </div>
 
 <!-- CONGRATULATION -->
@@ -120,7 +120,7 @@
             defaultImage: "pluzzle/images/puzzle/rompecabezas.jpg",
             image: jigsaw.GET["image"],
             spread: .5,
-            defaultPieces: 20,
+            defaultPieces: 36,
             numberOfPieces: [10, 20, 30, 40, 50, 60, 100],
             piecesNumberTmpl: "%d Pieces",
             shuffled: true,
@@ -132,8 +132,15 @@
         });
 
         var observer = new MutationObserver(function(mutations) {
-            parent.$('body').trigger('gameCompleted');
+            var data = {
+                time: jsaw.ui.time(),
+                init: jsaw.ui.ini,
+                final: new Date().getTime(),
+            }
+            var event = new CustomEvent('gameCompleted', { detail: data })
+            window.parent.document.dispatchEvent(event)
         });
+
         var target = document.querySelector('#congrat');
         observer.observe(target, {
             attributes: true

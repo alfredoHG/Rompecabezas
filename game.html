@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+       
+    </style>
+    <title>Inicio</title>
+</head>
+<body>
+
+<iframe id="inlineFrameExample"
+        title="Rompecabezas"
+        width="800"
+        height="600"
+        src="http://rompecabezas.com.lndo.site/rompecabezas.html">
+</iframe>
+
+<button id="btn-continue" style="display: none">Continuar</button>
+
+<script type="text/javascript" src="pluzzle/js/jquery-3.2.1.min.js"></script>
+<script>
+    window.document.addEventListener('gameCompleted', handleEvent, false)
+    function handleEvent(e) {
+        let finJuegoDate = new Date(e.detail.final);
+        let inicioJuegoDate = new Date(e.detail.init);
+        $.ajax({
+            url: "https://cisa2021-pruebas.virtualevents.mx/usuarios/registrar-puntaje",
+            method: 'post',
+            data: {
+                juego: 'Rompecabezas',
+                puntaje: 0, // Actualmente solo se calcula el tiempo, no está definido cómo se calculará el puntaje
+                inicio_juego: inicioJuegoDate.toJSON().replace('T', ' ').substr(0, 19),
+                fin_juego: finJuegoDate.toJSON().replace('T', ' ').substr(0, 19),
+            }
+        })
+            .done(function( data ) {
+                document.getElementById('btn-continue').style.display = 'block';
+            })
+    }
+</script>
+</body>
+</html>
