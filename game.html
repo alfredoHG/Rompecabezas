@@ -59,12 +59,13 @@
     function handleEvent(e) {
         let finJuegoDate = new Date(e.detail.final);
         let inicioJuegoDate = new Date(e.detail.init);
+        let puntaje = (~~((finJuegoDate - inicioJuegoDate)/1000)) % 60;
         $.ajax({
             url: "https://cisa2021-pruebas.virtualevents.mx/usuarios/registrar-puntaje",
             method: 'post',
             data: {
                 juego: 'Rompecabezas',
-                puntaje: 0, // Actualmente solo se calcula el tiempo, no está definido cómo se calculará el puntaje
+                puntaje: puntaje,
                 inicio_juego: inicioJuegoDate.toJSON().replace('T', ' ').substr(0, 19),
                 fin_juego: finJuegoDate.toJSON().replace('T', ' ').substr(0, 19),
             }
