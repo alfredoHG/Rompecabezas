@@ -11811,6 +11811,13 @@ footer .foot-info {
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "3M GT";
+  src: url("gotham-ultra.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
 ::selection {
   background: #262626;
   color: #fff;
